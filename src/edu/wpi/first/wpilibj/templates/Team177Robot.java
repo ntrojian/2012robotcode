@@ -44,6 +44,7 @@ public class Team177Robot extends IterativeRobot {
     /** IO Definitions **/
     
     /* Instansiate Speed Controlers and Drive */
+    Victor finRollers = new Victor(5);
     Victor frontLeftMotor = new Victor(4);
     Victor frontRightMotor = new Victor(3);
     Victor rearLeftMotor = new Victor(1);
@@ -153,6 +154,21 @@ public class Team177Robot extends IterativeRobot {
         
         fin.set(finState);
         
+        /* Fin Rollers */
+        double rightControlAxis = operatorStick.getRawAxis(5);
+        if(rightControlAxis > 0)
+        {
+            finRollers.set(.5D);
+        }
+        else if(rightControlAxis < 0)
+        {
+            finRollers.set(-.5D);
+        }
+        else
+        {
+            finRollers.set(0);
+        }
+        
         /* Fingers */
         fingers.set(operatorStick.getRawButton(fingerButton));
         
@@ -163,7 +179,7 @@ public class Team177Robot extends IterativeRobot {
             {
   /*              shooter1.setX(2000);
                 shooter2.setX(2000);
-    */        }
+    */      }
             catch(Exception e)
             {
                 System.out.println("ERRORS: " + e);
